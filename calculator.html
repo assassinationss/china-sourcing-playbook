@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>China Import Landed Cost Calculator — FBA Duty & Freight Estimator</title>
+<meta name="description" content="Free calculator: estimate the true landed cost per unit of your China import — goods + freight + duties (HTS) + MPF/HMF fees — and your margin before you commit to an order.">
+<meta property="og:title" content="China Import Landed Cost Calculator">
+<meta property="og:description" content="Know your true per-unit cost before you wire the deposit. Free tool.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1e3a5f;--navy-l:#4a7ac7;--ink:#2a3542;--muted:#67788c;--bg:#f7f9fc;--card:#fff;--border:#dce6f2;--good:#2e7d52;--bad:#b3402a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.6}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px 60px}
+header{background:linear-gradient(135deg,#16304f 0%,#1e3a5f 60%,#2a4d78 100%);color:#fff;padding:44px 0 38px;margin-bottom:32px}
+header .wrap{padding-bottom:0}
+.kicker{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#8fb3dd;margin-bottom:10px}
+h1{font-family:'Playfair Display',Georgia,serif;font-size:40px;font-weight:900;line-height:1.12;max-width:760px}
+.sub{margin-top:14px;color:#c6d6ea;font-size:16px;max-width:640px}
+.crumb{margin-top:18px;font-size:13px;color:#8fb3dd}
+.crumb a{color:#bcd2ee;text-decoration:none;border-bottom:1px dotted #bcd2ee}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+@media(max-width:880px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 26px;margin-bottom:22px}
+.card h2{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--navy-l);margin-bottom:16px}
+label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:5px}
+.hint{font-size:11.5px;color:var(--muted);font-weight:400;margin-left:2px}
+input,select{width:100%;padding:9px 11px;border:1px solid var(--border);border-radius:8px;font:inherit;font-size:14px;background:#fbfdff;color:var(--ink)}
+input:focus,select:focus{outline:2px solid #4a7ac755;border-color:var(--navy-l)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.f{margin-bottom:14px}
+.check{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:10px 0 2px}
+.check input{width:auto}
+.sticky{position:sticky;top:16px}
+.result-hero{background:linear-gradient(135deg,#16304f,#2a4d78);color:#fff;border-radius:12px;padding:26px;margin-bottom:18px}
+.result-hero .lbl{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8fb3dd;font-weight:700}
+.result-hero .big{font-size:42px;font-weight:900;font-family:'Playfair Display',serif;margin:4px 0 2px}
+.result-hero .per{color:#c6d6ea;font-size:14px}
+.result-hero .margin-tag{display:inline-block;margin-top:10px;padding:5px 12px;border-radius:20px;font-size:13px;font-weight:700}
+.m-good{background:#2e7d5233;color:#9dd8b7}
+.m-warn{background:#b3772a33;color:#ecc98f}
+.m-bad{background:#b3402a33;color:#eba18f}
+.bars{margin-top:4px}
+.bar-row{margin-bottom:11px}
+.bar-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:3px}
+.bar-top b{font-weight:700;color:var(--navy)}
+.track{height:9px;background:#e8eef7;border-radius:5px;overflow:hidden}
+.fill{height:100%;border-radius:5px}
+.copy-btn{margin-top:6px;background:none;border:1px solid var(--border);border-radius:8px;padding:7px 14px;font:inherit;font-size:13px;font-weight:600;color:var(--navy);cursor:pointer}
+.copy-btn:hover{background:#eef4fb}
+.cta-box{background:#fff;border:1px solid var(--border);border-left:4px solid var(--navy-l);border-radius:10px;padding:18px 20px;font-size:14px}
+.cta-box b{color:var(--navy)}
+.cta-box a{color:var(--navy-l);font-weight:700;text-decoration:none}
+.foot{margin-top:30px;font-size:12.5px;color:var(--muted);border-top:1px solid var(--border);padding-top:18px}
+.dis{background:#fdf6ec;border:1px solid #ecd9b8;border-radius:8px;padding:12px 14px;font-size:12.5px;color:#7a5a22;margin-top:16px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">Free Tool · Sol Research Desk</div>
+    <h1>China Import Landed&nbsp;Cost Calculator</h1>
+    <div class="sub">Know your <b>true per-unit cost</b> — goods + freight + duties + import fees — before you wire the deposit. Built for Amazon FBA &amp; e-commerce sellers.</div>
+    <div class="crumb">← <a href="https://assassinationss.github.io/china-sourcing-playbook/">The China Sourcing Playbook</a> · <a href="https://github.com/assassinationss/awesome-china-sourcing">Free verification toolkit</a></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+    <div>
+      <div class="card">
+        <h2>① Goods &amp; Terms</h2>
+        <div class="row">
+          <div class="f"><label>Unit price (USD)</label><input type="number" id="unit" value="4.50" step="0.01" min="0"></div>
+          <div class="f"><label>Quantity</label><input type="number" id="qty" value="1000" step="1" min="1"></div>
+        </div>
+        <div class="f"><label>Incoterm from supplier</label>
+          <select id="incoterm">
+            <option value="FOB">FOB — supplier delivers to origin port (recommended)</option>
+            <option value="EXW">EXW — you collect at their factory</option>
+            <option value="CIF">CIF — freight &amp; insurance included in price</option>
+            <option value="DDP">DDP — all costs included, delivered</option>
+          </select>
+          <div class="hint" id="inco-hint">You pay: freight + insurance + duties + import fees.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>② Freight</h2>
+        <div class="f"><label>Shipping mode</label>
+          <select id="mode">
+            <option value="sea-lcl">Sea LCL (less than container)</option>
+            <option value="sea-fcl">Sea FCL (full container)</option>
+            <option value="air">Air freight</option>
+            <option value="express">Express courier (DHL/FedEx/UPS)</option>
+          </select>
+        </div>
+        <div class="row3" id="freight-calc">
+          <div class="f"><label>Rate <span class="hint" id="rate-unit">$ / cbm</span></label><input type="number" id="frate" value="120" step="1" min="0"></div>
+          <div class="f"><label>Chargeable <span class="hint" id="qty-unit">cbm</span></label><input type="number" id="funits" value="2" step="0.1" min="0"></div>
+          <div class="f"><label>Freight total <span class="hint">(auto)</span></label><input type="number" id="freight" value="240" step="1" min="0"></div>
+        </div>
+        <div class="row">
+          <div class="f"><label>Origin charges (USD) <span class="hint">EXW only: factory→port, export clearance</span></label><input type="number" id="origin" value="0" step="10" min="0"></div>
+          <div class="f"><label>Destination fees (USD) <span class="hint">port handling, customs broker, drayage</span></label><input type="number" id="dest" value="450" step="10" min="0"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>③ Duties &amp; Fees (US imports)</h2>
+        <div class="row">
+          <div class="f"><label>Duty category (typical HTS range)</label>
+            <select id="dcat">
+              <option value="0">Electronics &amp; accessories — 0%</option>
+              <option value="4">Toys &amp; games — ~4%</option>
+              <option value="8">Home goods / kitchen — ~8%</option>
+              <option value="12" selected>General merchandise — ~12%</option>
+              <option value="17">Apparel — ~17%</option>
+              <option value="32">Textiles / backpacks — up to ~32%</option>
+              <option value="custom">Custom rate…</option>
+            </select>
+          </div>
+          <div class="f"><label>Duty rate %</label><input type="number" id="drate" value="12" step="0.1" min="0" max="200"></div>
+        </div>
+        <label class="check"><input type="checkbox" id="autofee" checked> Auto-add MPF (0.3464%, $31.67–$614.35) + HMF for sea</label>
+        <div class="hint" style="margin-top:4px">⚠️ Since 2025 the US de minimis exemption is gone — every shipment pays duties. Verify your exact HTS code at hts.usitc.gov.</div>
+      </div>
+
+      <div class="card">
+        <h2>④ Your Sale Price</h2>
+        <div class="row">
+          <div class="f"><label>Selling price / unit (USD)</label><input type="number" id="sale" value="19.99" step="0.01" min="0"></div>
+          <div class="f"><label>Marketplace fee % <span class="hint">FBA referral+fulfillment all-in</span></label><input type="number" id="mktfee" value="40" step="1" min="0" max="90"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky">
+      <div class="result-hero">
+        <div class="lbl">True Landed Cost / Unit</div>
+        <div class="big" id="perunit">$0.00</div>
+        <div class="per" id="total">Order total: $0</div>
+        <span class="margin-tag" id="mtag">margin —</span>
+      </div>
+      <div class="card">
+        <h2>Cost Breakdown</h2>
+        <div class="bars" id="bars"></div>
+        <button class="copy-btn" onclick="copySummary()">📋 Copy summary</button>
+      </div>
+      <div class="card">
+        <h2>Profit Check</h2>
+        <div class="bar-row bar-top"><span>Net payout / unit (after fees)</span><b id="net">$0.00</b></div>
+        <div class="bar-row bar-top"><span>Profit / unit</span><b id="profit">$0.00</b></div>
+        <div class="bar-row bar-top"><span>Margin on payout</span><b id="marginpc">—</b></div>
+        <div class="bar-row bar-top"><span>Cash multiple (ROI)</span><b id="roi">—</b></div>
+        <div class="bar-row bar-top"><span>Break-even sale price</span><b id="be">$0.00</b></div>
+      </div>
+      <div class="cta-box">
+        <b>A quote is only as good as the supplier behind it.</b><br>
+        Verify any Chinese supplier in 6 steps before money moves — free system, red flags, and 25 negotiation templates in the <a href="https://assassinationss.github.io/china-sourcing-playbook/">China Sourcing Playbook</a>.
+      </div>
+      <div class="dis">Estimates only — duty rates vary by exact HTS classification and origin programs; freight swings with season and route. Always verify your HTS code and get a landed-cost confirmation from your broker for shipments &gt; $10k.</div>
+    </div>
+  </div>
+
+  <div class="foot">
+    Free tool by <b>Sol Research Desk</b> · part of <a href="https://github.com/assassinationss/awesome-china-sourcing" style="color:var(--navy)">Awesome China Sourcing</a> ·
+    calculators don't verify suppliers — <a href="https://assassinationss.github.io/china-sourcing-playbook/" style="color:var(--navy)">the Playbook does</a>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const modeCfg = {
+  'sea-lcl': {unit:'$ / cbm', qunit:'cbm', rate:120, units:2},
+  'sea-fcl': {unit:'$ flat', qunit:'containers', rate:2200, units:1},
+  'air':     {unit:'$ / kg', qunit:'kg', rate:5, units:150},
+  'express': {unit:'$ / kg', qunit:'kg', rate:6.5, units:60}
+};
+const incoHint = {
+  EXW:'You pay: origin charges + freight + insurance + duties + fees.',
+  FOB:'You pay: freight + insurance + duties + import fees.',
+  CIF:'Price already includes freight & insurance — you pay duties + fees. Set freight to 0.',
+  DDP:'Everything included in the price. Set freight, duties and fees to 0.'
+};
+function fmt(n){return '$'+n.toLocaleString('en-US',{minimumFractionDigits:n<100?2:0,maximumFractionDigits:2})}
+
+function syncMode(){
+  const c = modeCfg[$('mode').value];
+  $('rate-unit').textContent = c.unit;
+  $('qty-unit').textContent = c.qunit;
+  $('frate').value = c.rate; $('funits').value = c.units;
+  calcFreight();
+}
+function calcFreight(){
+  const inc = $('incoterm').value;
+  if(inc==='CIF' || inc==='DDP'){$('freight').value = 0; return;}
+  $('freight').value = Math.round($('frate').value * $('funits').value * 100)/100;
+}
+function calc(){
+  const inc = $('incoterm').value;
+  $('inco-hint').textContent = incoHint[inc];
+  const goods = $('unit').value * $('qty').value;
+  const freight = +$('freight').value || 0;
+  const origin = inc==='EXW' ? (+$('origin').value||0) : 0;
+  const dest = inc==='DDP' ? 0 : (+$('dest').value||0);
+  const customsValue = goods;
+  let duty = 0, fees = 0;
+  if(inc!=='DDP'){
+    duty = customsValue * $('drate').value/100;
+    if($('autofee').checked){
+      let mpf = customsValue*0.003464;
+      mpf = Math.max(31.67, Math.min(614.35, mpf));
+      fees += mpf;
+      if($('mode').value.startsWith('sea')) fees += customsValue*0.00125;
+    }
+  }
+  const total = goods + origin + freight + dest + duty + fees;
+  const per = total / $('qty').value;
+  $('perunit').textContent = fmt(per);
+  $('total').textContent = 'Order total: '+fmt(total);
+
+  const parts = [
+    ['Goods', goods, '#1e3a5f'],
+    ['Freight', freight, '#4a7ac7'],
+    ['Duties', duty, '#b3402a'],
+    ['Fees (MPF/HMF + destination)', fees+dest+origin, '#c9962a']
+  ].filter(p=>p[1]>0.5);
+  $('bars').innerHTML = parts.map(p=>{
+    const w = Math.max(1.5, p[1]/total*100);
+    return `<div class="bar-row"><div class="bar-top"><span>${p[0]}</span><b>${fmt(p[1])} · ${Math.round(p[1]/total*100)}%</b></div><div class="track"><div class="fill" style="width:${w}%;background:${p[2]}"></div></div></div>`;
+  }).join('');
+
+  const sale = +$('sale').value||0;
+  const payout = sale * (1-$('mktfee').value/100);
+  const profit = payout - per;
+  const mpc = payout>0 ? profit/payout*100 : 0;
+  $('net').textContent = fmt(payout);
+  $('profit').textContent = fmt(profit);
+  $('profit').style.color = profit>=0?'var(--good)':'var(--bad)';
+  $('marginpc').textContent = mpc.toFixed(1)+'%';
+  $('roi').textContent = per>0 ? (profit/per).toFixed(2)+'×' : '—';
+  $('be').textContent = fmt(per/(1-$('mktfee').value/100));
+  const tag = $('mtag');
+  tag.textContent = profit<=0 ? 'losing money at this price' : mpc>=30?'healthy margin ✓':mpc>=15?'workable margin':'thin margin';
+  tag.className = 'margin-tag '+(profit<=0?'m-bad':mpc>=30?'m-good':'m-warn');
+  window._summary = `LANDED COST — ${$('qty').value} units from China (${inc}, ${$('mode').value})
+Goods: ${fmt(goods)} | Freight: ${fmt(freight)}${origin?` | Origin: ${fmt(origin)}`:''} | Dest/fees: ${fmt(dest+fees)} | Duty(${$('drate').value}%): ${fmt(duty)}
+TOTAL: ${fmt(total)} → ${fmt(per)}/unit | Sale ${fmt(sale)} → profit ${fmt(profit)}/unit (${mpc.toFixed(1)}% margin)
+— via assassinationss.github.io/china-sourcing-playbook/calculator.html`;
+}
+function copySummary(){
+  navigator.clipboard.writeText(window._summary||'').then(()=>{});
+  event.target.textContent='✓ Copied';
+  setTimeout(()=>{event.target.textContent='📋 Copy summary'},1500);
+}
+document.querySelectorAll('input,select').forEach(el=>{
+  el.addEventListener('input', e=>{
+    if(e.target.id==='frate'||e.target.id==='funits') calcFreight();
+    calc();
+  });
+  el.addEventListener('change', ()=>{
+    if(e.target.id==='mode') syncMode();
+    if(e.target.id==='dcat'){
+      if(e.target.value!=='custom') $('drate').value = e.target.value;
+    }
+    if(e.target.id==='incoterm'){calcFreight();}
+    calc();
+  });
+});
+syncMode(); calc();
+</script>
+</body>
+</html>
